@@ -44,7 +44,7 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = SKSceneScaleMode.ResizeFill
-            skView.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.5))
+            skView.presentScene(scene)
         }
     }
     
@@ -65,6 +65,7 @@ class GameViewController: UIViewController {
     {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+        skView.removeFromSuperview()
     }
 
     override func prefersStatusBarHidden() -> Bool

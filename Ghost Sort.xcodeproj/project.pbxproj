@@ -10,6 +10,7 @@
 		8D2A625A1A8821020031FD2F /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A62591A8821020031FD2F /* GameLogic.swift */; };
 		8DBACCBC1A8829F8005AC970 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBACCBB1A8829F8005AC970 /* InstructionsViewController.swift */; };
 		8DBACCC01A887528005AC970 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBACCBF1A887528005AC970 /* MainMenuViewController.swift */; };
+		8DBE6E3A1A8C8A920099F00D /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE6E391A8C8A920099F00D /* GameConstants.swift */; };
 		8DF883641A8415B40070D993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF883631A8415B40070D993 /* AppDelegate.swift */; };
 		8DF883661A8415B40070D993 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DF883651A8415B40070D993 /* GameScene.sks */; };
 		8DF883681A8415B40070D993 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF883671A8415B40070D993 /* GameScene.swift */; };
@@ -34,6 +35,7 @@
 		8D2A62591A8821020031FD2F /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		8DBACCBB1A8829F8005AC970 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		8DBACCBF1A887528005AC970 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		8DBE6E391A8C8A920099F00D /* GameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		8DF8835E1A8415B40070D993 /* Ghost Sort.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghost Sort.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF883621A8415B40070D993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DF883631A8415B40070D993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				8D2A62591A8821020031FD2F /* GameLogic.swift */,
+				8DBE6E391A8C8A920099F00D /* GameConstants.swift */,
 			);
 			name = Model;
 			path = "Ghost Sort";
@@ -250,6 +253,7 @@
 				8DF883681A8415B40070D993 /* GameScene.swift in Sources */,
 				8DF8836A1A8415B40070D993 /* GameViewController.swift in Sources */,
 				8D2A625A1A8821020031FD2F /* GameLogic.swift in Sources */,
+				8DBE6E3A1A8C8A920099F00D /* GameConstants.swift in Sources */,
 				8DF883641A8415B40070D993 /* AppDelegate.swift in Sources */,
 				8DBACCBC1A8829F8005AC970 /* InstructionsViewController.swift in Sources */,
 			);
