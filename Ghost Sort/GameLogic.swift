@@ -7,3 +7,33 @@
 //
 
 import Foundation
+
+class GameLogic
+{
+    var score: Int
+    init(){
+        score = 0
+    }
+    
+    func checkForMatch(item: String, item2: String)
+    {
+        if item == item2
+        {
+            match()
+        }
+        else
+        {
+            misMatch()
+        }
+    }
+    
+    func match()
+    {
+        score++
+    }
+    func misMatch()
+    {
+        score--
+    }
+    
+}

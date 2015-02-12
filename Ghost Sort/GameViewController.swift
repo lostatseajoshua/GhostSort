@@ -27,12 +27,15 @@ extension SKNode {
 
 class GameViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var skView: SKView!
 
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene
+        {
             // Configure the view.
-            let skView = self.view as SKView
+            skView = self.view as SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
             
@@ -40,13 +43,13 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
-            skView.presentScene(scene)
+            scene.scaleMode = SKSceneScaleMode.ResizeFill
+            skView.presentScene(scene, transition: SKTransition.crossFadeWithDuration(0.5))
         }
     }
-
-    override func shouldAutorotate() -> Bool {
+    
+    override func shouldAutorotate() -> Bool
+    {
         return true
     }
 
@@ -58,12 +61,14 @@ class GameViewController: UIViewController {
         }
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override func prefersStatusBarHidden() -> Bool
+    {
         return true
     }
 }

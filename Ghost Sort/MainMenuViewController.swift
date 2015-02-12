@@ -9,16 +9,39 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
+    
+    @IBOutlet weak var instructionsButton: UIButton!
+    @IBOutlet weak var beginGameButton: UIButton!
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.instructionsButton.layer.cornerRadius = self.instructionsButton.bounds.size.width / 2
+        self.beginGameButton.layer.cornerRadius = self.beginGameButton.bounds.size.width / 2
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func presentInstructionsView(sender: UIButton)
+    {
+        let instructionsView = self.storyboard?.instantiateViewControllerWithIdentifier("InstructionsView") as UIViewController
+        self.presentViewController(instructionsView, animated: true, completion: nil)
     }
     
 
