@@ -44,6 +44,8 @@ class GameScene: SKScene {
     {
         createBackground()
         createScoreLabel()
+        createBlueGrave()
+        createRedGrave()
     }
     
     func createScoreLabel()
@@ -73,8 +75,10 @@ class GameScene: SKScene {
         let createRedGhostsAction = SKAction.runBlock({self.createRedGhostsAtRandomPointWithActions()})
         let createRedGhostsAtRandomPoints = SKAction.sequence([createRedGhostsAction, delayAction()])
         self.runAction(SKAction.repeatActionForever(createRedGhostsAtRandomPoints))
+        
     }
-    //MARK: CREATE GHOST SPRITE NODES
+    //MARK: CREATE NODES
+    //MARK: GHOST NODES
     func createBlueGhostsAtRandomPointWithActions()
     {
         let blueGhost = SKSpriteNode(imageNamed: "BlueGhost")
@@ -98,7 +102,23 @@ class GameScene: SKScene {
         let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
         redGhost.runAction(ghostActionSequence)
     }
-
+    //MARK: GRAVE NODES
+    func createBlueGrave()
+    {
+        let blueGrave = SKSpriteNode(imageNamed: "BlueGrave")
+        blueGrave.anchorPoint = CGPoint(x: 1, y: 0.5)
+        blueGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) - GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
+        blueGrave.userInteractionEnabled = false
+        self.addChild(blueGrave)
+    }
+    func createRedGrave()
+    {
+        let redGrave = SKSpriteNode(imageNamed: "RedGrave")
+        redGrave.anchorPoint = CGPoint(x: 0, y: 0.5)
+        redGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) + GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
+        redGrave.userInteractionEnabled = false
+        self.addChild(redGrave)
+    }
     //MARK: SKACTIONS
     func createRandomPoint() -> CGPoint
     {
@@ -159,7 +179,7 @@ class GameScene: SKScene {
             }
         }
     }
-    
+
 //
 //    SKAction *die = [SKAction sequence:@[
 //    [SKAction waitForDuration:1],
