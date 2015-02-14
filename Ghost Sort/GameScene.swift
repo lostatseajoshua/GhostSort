@@ -62,20 +62,26 @@ class GameScene: SKScene {
         background.position = CGPoint(x: CGRectGetMidX(self.view!.bounds), y: CGRectGetMidY(self.view!.bounds))
         let fade = SKAction.fadeInWithDuration(0.5)
         background.runAction(fade)
-        background.zPosition = -1
+        background.zPosition = -2
         self.addChild(background)
     }
     //MARK: START GAME
     func startGame()
     {
         let createBlueGhostsAction = SKAction.runBlock({self.createBlueGhostsAtRandomPointWithActions()})
-        let createBlueGhostsAtRandomPoints = SKAction.sequence([createBlueGhostsAction, delayAction()])
+        let createBlueGhostsAtRandomPoints = SKAction.sequence([createBlueGhostsAction, delayActionByGameSpeed()])
         self.runAction(SKAction.repeatActionForever(createBlueGhostsAtRandomPoints))
         
         let createRedGhostsAction = SKAction.runBlock({self.createRedGhostsAtRandomPointWithActions()})
-        let createRedGhostsAtRandomPoints = SKAction.sequence([createRedGhostsAction, delayAction()])
+        let createRedGhostsAtRandomPoints = SKAction.sequence([createRedGhostsAction, delayActionByGameSpeed()])
         self.runAction(SKAction.repeatActionForever(createRedGhostsAtRandomPoints))
         
+    }
+    //MARK: STOP GAME
+    func gameOver()
+    {
+        self.dropAllGhostNodes()
+        self.removeAllActionsForAllNodes()
     }
     //MARK: CREATE NODES
     //MARK: GHOST NODES
@@ -87,7 +93,7 @@ class GameScene: SKScene {
         blueGhost.name = "BlueGhost"
         blueGhost.alpha = 0
         self.addChild(blueGhost)
-        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
+        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint(),pulseFade(),die()])
         blueGhost.runAction(ghostActionSequence)
     }
     
@@ -99,7 +105,7 @@ class GameScene: SKScene {
         redGhost.name = "RedGhost"
         redGhost.alpha = 0
         self.addChild(redGhost)
-        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
+        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint(),pulseFade(),die()])
         redGhost.runAction(ghostActionSequence)
     }
     //MARK: GRAVE NODES
@@ -109,6 +115,7 @@ class GameScene: SKScene {
         blueGrave.anchorPoint = CGPoint(x: 1, y: 0.5)
         blueGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) - GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
         blueGrave.userInteractionEnabled = false
+        blueGrave.zPosition = -1
         self.addChild(blueGrave)
     }
     func createRedGrave()
@@ -117,6 +124,7 @@ class GameScene: SKScene {
         redGrave.anchorPoint = CGPoint(x: 0, y: 0.5)
         redGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) + GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
         redGrave.userInteractionEnabled = false
+        redGrave.zPosition = -1
         self.addChild(redGrave)
     }
     //MARK: SKACTIONS
@@ -138,16 +146,35 @@ class GameScene: SKScene {
     {
         return SKAction.fadeInWithDuration(FADE_IN_SPEED)
     }
-    func delayAction() -> SKAction
+    func delayActionByGameSpeed() -> SKAction
     {
         return SKAction.waitForDuration(gameLogic.speed, withRange: gameLogic.speedRange)
 
+    }
+    func waitForDuration(delayTime: NSTimeInterval) -> SKAction
+    {
+        return SKAction.waitForDuration(delayTime)
+    }
+    func fadeAlphaOut() -> SKAction
+    {
+        return SKAction.fadeAlphaBy(-0.5, duration: 0.4)
+    }
+    func fadeAlphaIn() -> SKAction
+    {
+        return SKAction.fadeAlphaBy(0.5, duration: 0.4)
+    }
+    func pulseFade() -> SKAction
+    {
+        return SKAction.sequence([fadeAlphaOut(),fadeAlphaIn(),fadeAlphaOut(),fadeAlphaIn(),fadeAlphaOut(),fadeAlphaIn(),fadeAlphaOut(),fadeAlphaIn()])
+    }
+    func die() -> SKAction
+    {
+        return SKAction.runBlock({ self.gameOver() })
     }
     //MARK: DROP NODES
     func dropAllNodes()
     {
         self.removeAllChildren()
-        self.removeAllActions()
     }
     func dropAllGhostNodes()
     {
@@ -179,17 +206,12 @@ class GameScene: SKScene {
             }
         }
     }
-
-//
-//    SKAction *die = [SKAction sequence:@[
-//    [SKAction waitForDuration:1],
-//    [SKAction repeatAction:pulseColor count:5],
-//    //[SKAction runBlock:^{[self gameover];}]
-//    ]];
-//    SKAction *removeBlackSquare = [SKAction sequence:@[[SKAction waitForDuration:.5],[SKAction removeFromParent]]];
-//    [blackSquare runAction:removeBlackSquare];
-//    [ghost runAction:move];
-//    [ghost runAction:die];
-//    }
+    //MARK: REMOVE ALL ACTIONS
+    func removeAllActionsForAllNodes() {
+        for node in self.children
+        {
+            node.removeAllActions()
+        }
+    }
 
 }
