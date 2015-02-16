@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var instructionsButton: UIButton!
     @IBOutlet weak var beginGameButton: UIButton!
+    
+    var audioPlayer: AVAudioPlayer!
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        playMusic()
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,15 +47,46 @@ class MainMenuViewController: UIViewController {
         self.presentViewController(instructionsView, animated: true, completion: nil)
     }
     
+    func playMusic()
+    {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let isMusicEnabled = userDefaults.objectForKey("Music") as? Bool
+        {
+            if isMusicEnabled
+            {
+                let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
+                if let songUrl = url {
+                    var error: NSError?
+                    audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.numberOfLoops = -1
+                    audioPlayer.play()
+                }
+            }
+        }else{
+            userDefaults.setBool(true, forKey: "Music")
+            userDefaults.synchronize()
+            playMusic()
+        }
+    }
+    func stopPlayingMusic()
+    {
+        if audioPlayer.playing
+        {
+            audioPlayer.stop()
+            audioPlayer = nil
+        }
+    }
 
-    /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "game"
+        {
+            stopPlayingMusic()
+        }
     }
-    */
 
 }

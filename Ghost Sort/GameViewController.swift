@@ -8,6 +8,8 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
+
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
@@ -32,21 +34,23 @@ class GameViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene
-        {
-            // Configure the view.
-            skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = SKSceneScaleMode.ResizeFill
-            skView.presentScene(scene)
-        }
+        // Configure the view.
+        skView = self.view as SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.showsFields = true
+        let scene = GameScene(size: self.view.frame.size)
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        scene.scaleMode = SKSceneScaleMode.Fill
+        
+        println(scene.frame)
+        skView.presentScene(scene)
+        
     }
+    
     
     override func shouldAutorotate() -> Bool
     {
@@ -72,4 +76,5 @@ class GameViewController: UIViewController {
     {
         return true
     }
+
 }

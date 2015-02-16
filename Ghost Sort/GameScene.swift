@@ -12,23 +12,27 @@ class GameScene: SKScene {
     
     let gameLogic = GameLogic()
     let score = SKLabelNode()
+    var selectedNode: SKNode?
+    var blueGraveNode: SKNode!
+    {
+        get{
+            return self.childNodeWithName("BlueGrave")
+        }
+    }
+    var redGraveNode: SKNode!
+    {
+        get{
+            return self.childNodeWithName("RedGrave")
+        }
+    }
     
     override func didMoveToView(view: SKView)
     {
         println("didMoveToView")
+        println(view.frame)
         /* Setup your scene here */
         createInitalScene()
         startGame()
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
-    {
-        /* Called when a touch begins */
-        
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-        }
     }
     
     func updateUI(){
@@ -38,6 +42,7 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
+        score.text = "\(gameLogic.score)"
     }
     //MARK: CREATE GAME SCENE
     func createInitalScene()
@@ -51,15 +56,16 @@ class GameScene: SKScene {
     func createScoreLabel()
     {
         score.position = CGPoint(x: CGRectGetMidX(self.view!.frame), y: CGRectGetMaxY(self.view!.frame) - 28)
-        print(score.position)
-        score.fontColor = SKColor.blackColor()
+        score.fontColor = SKColor.whiteColor()
+        score.fontName = "AvenirNext-UltraLight"
         score.text = "0"
         self.addChild(score)
     }
     func createBackground()
     {
-        let background = SKSpriteNode(imageNamed: "Background")
-        background.position = CGPoint(x: CGRectGetMidX(self.view!.bounds), y: CGRectGetMidY(self.view!.bounds))
+        let backgroundTexture = SKTexture(imageNamed: "Background")
+        let background = SKSpriteNode(texture: backgroundTexture, size: self.view!.frame.size)
+        background.position = CGPoint(x: CGRectGetMidX(self.view!.frame), y: CGRectGetMidY(self.view!.frame))
         let fade = SKAction.fadeInWithDuration(0.5)
         background.runAction(fade)
         background.zPosition = -2
@@ -75,7 +81,6 @@ class GameScene: SKScene {
         let createRedGhostsAction = SKAction.runBlock({self.createRedGhostsAtRandomPointWithActions()})
         let createRedGhostsAtRandomPoints = SKAction.sequence([createRedGhostsAction, delayActionByGameSpeed()])
         self.runAction(SKAction.repeatActionForever(createRedGhostsAtRandomPoints))
-        
     }
     //MARK: STOP GAME
     func gameOver()
@@ -87,31 +92,35 @@ class GameScene: SKScene {
     //MARK: GHOST NODES
     func createBlueGhostsAtRandomPointWithActions()
     {
-        let blueGhost = SKSpriteNode(imageNamed: "BlueGhost")
+        let blueGhost = SKSpriteNode(imageNamed: BLUE_GHOST_NODE_NAME)
         let ghostRandomPositionPoint = createRandomPoint()
         blueGhost.position = ghostRandomPositionPoint
-        blueGhost.name = "BlueGhost"
+        blueGhost.name = BLUE_GHOST_NODE_NAME
         blueGhost.alpha = 0
+        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
+        blueGhost.runAction(ghostActionSequence, withKey: "FadeInAndMove")
+        blueGhost.runAction(SKAction.sequence([waitForDuration(10),die()]))
         self.addChild(blueGhost)
-        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint(),pulseFade(),die()])
-        blueGhost.runAction(ghostActionSequence)
+
     }
     
     func createRedGhostsAtRandomPointWithActions()
     {
-        let redGhost = SKSpriteNode(imageNamed: "RedGhost")
+        let redGhost = SKSpriteNode(imageNamed: RED_GHOST_NODE_NAME)
         let ghostRandomPositionPoint = createRandomPoint()
         redGhost.position = ghostRandomPositionPoint
-        redGhost.name = "RedGhost"
+        redGhost.name = RED_GHOST_NODE_NAME
         redGhost.alpha = 0
+        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
+        redGhost.runAction(ghostActionSequence, withKey: "FadeInAndMove")
+        redGhost.runAction(SKAction.sequence([waitForDuration(10),die()]))
         self.addChild(redGhost)
-        let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint(),pulseFade(),die()])
-        redGhost.runAction(ghostActionSequence)
     }
     //MARK: GRAVE NODES
     func createBlueGrave()
     {
         let blueGrave = SKSpriteNode(imageNamed: "BlueGrave")
+        blueGrave.name = "BlueGrave"
         blueGrave.anchorPoint = CGPoint(x: 1, y: 0.5)
         blueGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) - GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
         blueGrave.userInteractionEnabled = false
@@ -121,6 +130,7 @@ class GameScene: SKScene {
     func createRedGrave()
     {
         let redGrave = SKSpriteNode(imageNamed: "RedGrave")
+        redGrave.name = "RedGrave"
         redGrave.anchorPoint = CGPoint(x: 0, y: 0.5)
         redGrave.position = CGPointMake(CGRectGetMidX(self.view!.frame) + GRAVE_BUFFER_AMOUNT, CGRectGetMidY(self.view!.frame))
         redGrave.userInteractionEnabled = false
@@ -139,12 +149,16 @@ class GameScene: SKScene {
     func moveToRandomPoint() -> SKAction
     {
         let randomPoint = createRandomPoint()
-        let moveToRandomPoint = SKAction.moveTo(randomPoint, duration: 10)
+        let moveToRandomPoint = SKAction.moveTo(randomPoint, duration: 6)
         return moveToRandomPoint
     }
     func fadeIn() -> SKAction
     {
         return SKAction.fadeInWithDuration(FADE_IN_SPEED)
+    }
+    func fadeOut() -> SKAction
+    {
+        return SKAction.fadeOutWithDuration(FADE_OUT_SPEED)
     }
     func delayActionByGameSpeed() -> SKAction
     {
@@ -180,7 +194,7 @@ class GameScene: SKScene {
     {
         for node in self.children as [SKNode]
         {
-            if node.name == "BlueGhost" || node.name == "RedGhost"
+            if node.name == BLUE_GHOST_NODE_NAME || node.name == RED_GHOST_NODE_NAME
             {
                 node.removeFromParent()
             }
@@ -190,7 +204,7 @@ class GameScene: SKScene {
     {
         for node in self.children as [SKNode]
         {
-            if node.name == "RedGhost"
+            if node.name == RED_GHOST_NODE_NAME
             {
                 node.removeFromParent()
             }
@@ -200,7 +214,7 @@ class GameScene: SKScene {
     {
         for node in self.children as [SKNode]
         {
-            if node.name == "RedGhost"
+            if node.name == BLUE_GHOST_NODE_NAME
             {
                 node.removeFromParent()
             }
@@ -214,4 +228,62 @@ class GameScene: SKScene {
         }
     }
 
+    //MARK: TOUCHES EVENT
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+    {
+        /* Called when a touch begins */
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            let node = self.nodeAtPoint(location)
+            
+            if node.name == BLUE_GHOST_NODE_NAME || node.name == RED_GHOST_NODE_NAME
+            {
+                selectedNode = node
+                selectedNode!.paused = true
+            }else{
+                selectedNode = nil
+            }
+        }
+    }
+    
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        if selectedNode?.name == BLUE_GHOST_NODE_NAME || selectedNode?.name == RED_GHOST_NODE_NAME
+        {
+            selectedNode!.position = touches.anyObject()!.locationInNode(self)
+        }
+    }
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        if let node = selectedNode
+        {
+            if CGRectIntersectsRect(node.frame, blueGraveNode.frame)
+            {
+                if node.name == "BlueGhost"
+                {
+                    gameLogic.match()
+                    node.removeFromParent()
+                } else {
+                    gameOver()
+                    gameLogic.misMatch()
+                }
+            }else if CGRectIntersectsRect(node.frame, redGraveNode.frame) {
+                if node.name == "RedGhost"
+                {
+                    gameLogic.match()
+                    node.removeFromParent()
+                } else {
+                    gameOver()
+                    gameLogic.misMatch()
+                }
+            }else {
+                gameLogic.misMatch()
+                node.removeActionForKey("FadeInAndMove")
+                node.runAction(moveToRandomPoint(), withKey: "FadeInAndMove")
+                node.paused = false
+                selectedNode = nil
+            }
+        }
+    }
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        selectedNode?.paused = false
+    }
 }

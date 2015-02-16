@@ -10,33 +10,25 @@ import Foundation
 
 class GameLogic
 {
-    var score: Int
+    var score: Int {
+        didSet{
+            updateGameSpeed()
+        }
+    }
     var speed: Double
     var speedRange: Double
     init(){
         score = 0
-        speed = 2.0
-        speedRange = 2.5
+        speed = DEFAULT_GAMESPEED
+        speedRange = DEFAULT_GAMESPEED + GAME_SPEED_BUFFERRANGE
     }
     
-    func checkForMatch(item: String, item2: String)
-    {
-        if item == item2
-        {
-            match()
-        }
-        else
-        {
-            misMatch()
-        }
-    }
-    
-    private func match()
+    func match()
     {
         score++
     }
     
-    private func misMatch()
+    func misMatch()
     {
         score--
     }
@@ -45,9 +37,16 @@ class GameLogic
     {
         switch score
         {
-        case 0...10: speed = DEFAULT_GAMESPEED - SPEED_DECREASE_AMOUNT; speedRange = speed + GAME_SPEED_BUFFERRANGE
+        case 10: increaseGameSpeed()
+        case 15: increaseGameSpeed()
+        case 25: increaseGameSpeed()
+        case 35: increaseGameSpeed()
         default: speed = DEFAULT_GAMESPEED; speedRange = speed + GAME_SPEED_BUFFERRANGE
         }
+    }
+    private func increaseGameSpeed()
+    {
+        speed = speed - SPEED_DECREASE_AMOUNT; speedRange = speed - GAME_SPEED_BUFFERRANGE
     }
     
 }
