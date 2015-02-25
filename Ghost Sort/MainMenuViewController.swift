@@ -22,6 +22,18 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let isMusicEnabled = userDefaults.objectForKey("Music") as? Bool
+        {
+            if isMusicEnabled
+            {
+                soundPrefenceButton.setTitle("Sound On", forState: .Normal)
+            } else {
+                soundPrefenceButton.setTitle("Sound Off", forState: .Normal)
+            }
+        } else {
+            soundPrefenceButton.setTitle("Sound On", forState: .Normal)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -36,18 +48,6 @@ class MainMenuViewController: UIViewController {
         setupAVAudioPlayer()
         playMusic()
 
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let isMusicEnabled = userDefaults.objectForKey("Music") as? Bool
-        {
-            if isMusicEnabled
-            {
-                soundPrefenceButton.setTitle("Sound On", forState: .Normal)
-            } else {
-                soundPrefenceButton.setTitle("Sound Off", forState: .Normal)
-            }
-        } else {
-            soundPrefenceButton.setTitle("Sound On", forState: .Normal)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,12 +63,15 @@ class MainMenuViewController: UIViewController {
     
     func setupAVAudioPlayer()
     {
-        let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
-        if let songUrl = url {
-            var error: NSError?
-            audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)
-            audioPlayer.prepareToPlay()
-            audioPlayer.numberOfLoops = -1
+        if audioPlayer == nil
+        {
+            let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
+            if let songUrl = url {
+                var error: NSError?
+                audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)
+                audioPlayer.prepareToPlay()
+                audioPlayer.numberOfLoops = -1
+            }
         }
     }
         
@@ -79,7 +82,10 @@ class MainMenuViewController: UIViewController {
         {
             if isMusicEnabled
             {
-                audioPlayer.play()
+                if audioPlayer.playing != true
+                {
+                    audioPlayer.play()
+                }
             } else {
                 audioPlayer.stop()
             }

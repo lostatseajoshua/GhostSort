@@ -99,7 +99,7 @@ class GameScene: SKScene {
         blueGhost.alpha = 0
         let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
         blueGhost.runAction(ghostActionSequence, withKey: "FadeInAndMove")
-        blueGhost.runAction(SKAction.sequence([waitForDuration(10),die()]))
+        blueGhost.runAction(SKAction.sequence([waitForDuration(10),pulseFade(),die()]))
         self.addChild(blueGhost)
 
     }
@@ -113,7 +113,7 @@ class GameScene: SKScene {
         redGhost.alpha = 0
         let ghostActionSequence = SKAction.sequence([fadeIn(),moveToRandomPoint()])
         redGhost.runAction(ghostActionSequence, withKey: "FadeInAndMove")
-        redGhost.runAction(SKAction.sequence([waitForDuration(10),die()]))
+        redGhost.runAction(SKAction.sequence([waitForDuration(10),pulseFade(),die()]))
         self.addChild(redGhost)
     }
     //MARK: GRAVE NODES
