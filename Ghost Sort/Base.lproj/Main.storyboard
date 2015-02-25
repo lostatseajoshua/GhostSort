@@ -111,6 +111,9 @@
                                 <state key="normal" title="Sound on">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="toggleSoundSetting:" destination="EYU-7J-dz7" eventType="touchUpInside" id="VYv-ey-sT6"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" image="RedGhost" translatesAutoresizingMaskIntoConstraints="NO" id="6NN-AZ-Zmm">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -219,6 +222,7 @@
                     <connections>
                         <outlet property="beginGameButton" destination="DYg-BJ-scx" id="pg6-DB-jrL"/>
                         <outlet property="instructionsButton" destination="iLa-0n-YfK" id="YGC-hi-y5v"/>
+                        <outlet property="soundPrefenceButton" destination="0hF-S1-5IJ" id="jEN-bR-ZOS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDf-ju-LY2" userLabel="First Responder" sceneMemberID="firstResponder"/>

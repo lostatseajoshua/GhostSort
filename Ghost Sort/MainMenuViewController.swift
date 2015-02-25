@@ -13,6 +13,7 @@ class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var instructionsButton: UIButton!
     @IBOutlet weak var beginGameButton: UIButton!
+    @IBOutlet weak var soundPrefenceButton: UIButton!
     
     var audioPlayer: AVAudioPlayer!
 
@@ -21,7 +22,6 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        playMusic()
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,7 +33,21 @@ class MainMenuViewController: UIViewController {
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        setupAVAudioPlayer()
+        playMusic()
 
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let isMusicEnabled = userDefaults.objectForKey("Music") as? Bool
+        {
+            if isMusicEnabled
+            {
+                soundPrefenceButton.setTitle("Sound On", forState: .Normal)
+            } else {
+                soundPrefenceButton.setTitle("Sound Off", forState: .Normal)
+            }
+        } else {
+            soundPrefenceButton.setTitle("Sound On", forState: .Normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,6 +61,17 @@ class MainMenuViewController: UIViewController {
         self.presentViewController(instructionsView, animated: true, completion: nil)
     }
     
+    func setupAVAudioPlayer()
+    {
+        let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
+        if let songUrl = url {
+            var error: NSError?
+            audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)
+            audioPlayer.prepareToPlay()
+            audioPlayer.numberOfLoops = -1
+        }
+    }
+        
     func playMusic()
     {
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -54,14 +79,9 @@ class MainMenuViewController: UIViewController {
         {
             if isMusicEnabled
             {
-                let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
-                if let songUrl = url {
-                    var error: NSError?
-                    audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)
-                    audioPlayer.prepareToPlay()
-                    audioPlayer.numberOfLoops = -1
-                    audioPlayer.play()
-                }
+                audioPlayer.play()
+            } else {
+                audioPlayer.stop()
             }
         }else{
             userDefaults.setBool(true, forKey: "Music")
@@ -69,13 +89,37 @@ class MainMenuViewController: UIViewController {
             playMusic()
         }
     }
+    
     func stopPlayingMusic()
     {
-        if audioPlayer.playing
+        if audioPlayer != nil
         {
-            audioPlayer.stop()
-            audioPlayer = nil
+            let playingBool = audioPlayer.playing
+            if playingBool
+            {
+                audioPlayer.stop()
+            }
         }
+    }
+    
+    @IBAction func toggleSoundSetting(sender: UIButton)
+    {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if audioPlayer != nil
+        {
+            if audioPlayer.playing == true
+            {
+                audioPlayer.stop()
+                userDefaults.setBool(false, forKey: "Music")
+                soundPrefenceButton.setTitle("Sound Off", forState: .Normal)
+            } else {
+                audioPlayer.play()
+                userDefaults.setBool(true, forKey: "Music")
+                soundPrefenceButton.setTitle("Sound On", forState: .Normal)
+            }
+            userDefaults.synchronize()
+        }
+
     }
 
     // MARK: - Navigation
