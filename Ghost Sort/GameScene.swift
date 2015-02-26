@@ -13,6 +13,13 @@ class GameScene: SKScene {
     let gameLogic = GameLogic()
     let score = SKLabelNode()
     var selectedNode: SKNode?
+    var musicPerference : Bool
+    {
+        get
+        {
+            return checkForSoundSetting()
+        }
+    }
     
     //MARK: Computed Properties
     var blueGraveNode: SKNode!
@@ -90,7 +97,10 @@ class GameScene: SKScene {
     {
         self.dropAllGhostNodes()
         self.removeAllActionsForAllNodes()
-        self.runAction(gameOverSound())
+        if musicPerference
+        {
+            self.runAction(gameOverSound())
+        }
     }
     //MARK: CREATE NODES
     //MARK: GHOST NODES
@@ -280,7 +290,10 @@ class GameScene: SKScene {
                 if node.name == "BlueGhost"
                 {
                     gameLogic.match()
-                    self.runAction(bluePointSound())
+                    if musicPerference
+                    {
+                        self.runAction(bluePointSound())
+                    }
                     node.removeFromParent()
                 } else {
                     gameOver()
@@ -290,7 +303,10 @@ class GameScene: SKScene {
                 if node.name == "RedGhost"
                 {
                     gameLogic.match()
-                    self.runAction(redPointSound())
+                    if musicPerference
+                    {
+                        self.runAction(redPointSound())
+                    }
                     node.removeFromParent()
                 } else {
                     gameOver()
@@ -307,5 +323,23 @@ class GameScene: SKScene {
     }
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
         selectedNode?.paused = false
+    }
+    //MARK: UTILITY
+    func checkForSoundSetting() -> Bool
+    {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let isMusicEnabled = userDefaults.objectForKey("Music") as? Bool
+        {
+            if isMusicEnabled
+            {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            userDefaults.setBool(true, forKey: "Music")
+            userDefaults.synchronize()
+            return true
+        }
     }
 }

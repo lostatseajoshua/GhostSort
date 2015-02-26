@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8D2A625A1A8821020031FD2F /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A62591A8821020031FD2F /* GameLogic.swift */; };
+		8D3DA4F71A9F0627003C4163 /* redPoint.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D3DA4F61A9F0627003C4163 /* redPoint.wav */; };
 		8D634DBA1A9F023B007969B3 /* introSong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DB91A9F023B007969B3 /* introSong.wav */; };
 		8D634DBC1A9F026A007969B3 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DBB1A9F026A007969B3 /* gameOver.wav */; };
 		8D634DBE1A9F0280007969B3 /* bluePoint.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DBD1A9F0280007969B3 /* bluePoint.mp3 */; };
-		8D634DC01A9F0524007969B3 /* redPoint.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DBF1A9F0524007969B3 /* redPoint.wav */; };
+		8D634DC01A9F0524007969B3 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DBF1A9F0524007969B3 /* tap.wav */; };
 		8DA2EA551A906C3000EE6E80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA2EA541A906C3000EE6E80 /* AudioToolbox.framework */; };
 		8DA2EA571A906EA700EE6E80 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA2EA561A906EA700EE6E80 /* AVFoundation.framework */; };
 		8DBACCBC1A8829F8005AC970 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBACCBB1A8829F8005AC970 /* InstructionsViewController.swift */; };
@@ -39,10 +40,11 @@
 
 /* Begin PBXFileReference section */
 		8D2A62591A8821020031FD2F /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		8D3DA4F61A9F0627003C4163 /* redPoint.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redPoint.wav; sourceTree = "<group>"; };
 		8D634DB91A9F023B007969B3 /* introSong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = introSong.wav; sourceTree = "<group>"; };
 		8D634DBB1A9F026A007969B3 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		8D634DBD1A9F0280007969B3 /* bluePoint.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bluePoint.mp3; sourceTree = "<group>"; };
-		8D634DBF1A9F0524007969B3 /* redPoint.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redPoint.wav; sourceTree = "<group>"; };
+		8D634DBF1A9F0524007969B3 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		8DA2EA541A906C3000EE6E80 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8DA2EA561A906EA700EE6E80 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8DBACCBB1A8829F8005AC970 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
@@ -141,8 +143,9 @@
 				8DF8836E1A8415B40070D993 /* Images.xcassets */,
 				8DF883631A8415B40070D993 /* AppDelegate.swift */,
 				8DF883621A8415B40070D993 /* Info.plist */,
+				8D3DA4F61A9F0627003C4163 /* redPoint.wav */,
 				8D634DBD1A9F0280007969B3 /* bluePoint.mp3 */,
-				8D634DBF1A9F0524007969B3 /* redPoint.wav */,
+				8D634DBF1A9F0524007969B3 /* tap.wav */,
 				8D634DBB1A9F026A007969B3 /* gameOver.wav */,
 				8D634DB91A9F023B007969B3 /* introSong.wav */,
 			);
@@ -248,10 +251,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D634DC01A9F0524007969B3 /* redPoint.wav in Resources */,
+				8D634DC01A9F0524007969B3 /* tap.wav in Resources */,
 				8D634DBC1A9F026A007969B3 /* gameOver.wav in Resources */,
 				8DF883721A8415B40070D993 /* LaunchScreen.xib in Resources */,
 				8D634DBE1A9F0280007969B3 /* bluePoint.mp3 in Resources */,
+				8D3DA4F71A9F0627003C4163 /* redPoint.wav in Resources */,
 				8DF8836F1A8415B40070D993 /* Images.xcassets in Resources */,
 				8DF883661A8415B40070D993 /* GameScene.sks in Resources */,
 				8DF8836D1A8415B40070D993 /* Main.storyboard in Resources */,
