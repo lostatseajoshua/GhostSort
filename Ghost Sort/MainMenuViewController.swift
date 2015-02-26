@@ -65,7 +65,7 @@ class MainMenuViewController: UIViewController {
     {
         if audioPlayer == nil
         {
-            let url = NSBundle.mainBundle().URLForResource("gameIntroMusic", withExtension: ".wav")
+            let url = NSBundle.mainBundle().URLForResource("introSong", withExtension: ".wav")
             if let songUrl = url {
                 var error: NSError?
                 audioPlayer = AVAudioPlayer(contentsOfURL: songUrl, error: &error)

@@ -13,12 +13,15 @@ class GameScene: SKScene {
     let gameLogic = GameLogic()
     let score = SKLabelNode()
     var selectedNode: SKNode?
+    
+    //MARK: Computed Properties
     var blueGraveNode: SKNode!
     {
         get{
             return self.childNodeWithName("BlueGrave")
         }
     }
+    
     var redGraveNode: SKNode!
     {
         get{
@@ -87,6 +90,7 @@ class GameScene: SKScene {
     {
         self.dropAllGhostNodes()
         self.removeAllActionsForAllNodes()
+        self.runAction(gameOverSound())
     }
     //MARK: CREATE NODES
     //MARK: GHOST NODES
@@ -185,6 +189,22 @@ class GameScene: SKScene {
     {
         return SKAction.runBlock({ self.gameOver() })
     }
+    
+    //MARK: SOUNDS
+    func gameOverSound() -> SKAction
+    {
+        return SKAction.playSoundFileNamed("gameOver.wav", waitForCompletion: true)
+    }
+    
+    func bluePointSound() -> SKAction
+    {
+        return SKAction.playSoundFileNamed("bluePoint.mp3", waitForCompletion: true)
+    }
+    func redPointSound() -> SKAction
+    {
+        return SKAction.playSoundFileNamed("redPoint.wav", waitForCompletion: true)
+    }
+    
     //MARK: DROP NODES
     func dropAllNodes()
     {
@@ -260,6 +280,7 @@ class GameScene: SKScene {
                 if node.name == "BlueGhost"
                 {
                     gameLogic.match()
+                    self.runAction(bluePointSound())
                     node.removeFromParent()
                 } else {
                     gameOver()
@@ -269,6 +290,7 @@ class GameScene: SKScene {
                 if node.name == "RedGhost"
                 {
                     gameLogic.match()
+                    self.runAction(redPointSound())
                     node.removeFromParent()
                 } else {
                     gameOver()
