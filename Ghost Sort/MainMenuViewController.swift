@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import iAd
 
 class MainMenuViewController: UIViewController {
     
@@ -17,9 +18,23 @@ class MainMenuViewController: UIViewController {
     
     var audioPlayer: AVAudioPlayer!
 
+     override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.canDisplayBannerAds = true
+        //println("awake Form Nib \(self.instructionsButton.frame)")
+        println("awake From nib \(self.instructionsButton.frame.width) \(self.instructionsButton.layer.cornerRadius) ")
+
+
+    }
+    
     override func viewDidLoad()
     {
+        self.beginGameButton.setNeedsUpdateConstraints()
+
         super.viewDidLoad()
+        self.instructionsButton.layer.cornerRadius = self.instructionsButton.frame.width / 2
+        self.beginGameButton.layer.cornerRadius = self.beginGameButton.frame.width / 2
 
         // Do any additional setup after loading the view.
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -34,12 +49,19 @@ class MainMenuViewController: UIViewController {
         } else {
             soundPrefenceButton.setTitle("Sound On", forState: .Normal)
         }
+        println("View Did Layout Subviews \(self.instructionsButton.frame.width) \(self.instructionsButton.layer.cornerRadius) ")
+
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.instructionsButton.layer.cornerRadius = self.instructionsButton.bounds.size.width / 2
-        self.beginGameButton.layer.cornerRadius = self.beginGameButton.bounds.size.width / 2
+        self.originalContentView.layoutSubviews()
+        self.instructionsButton.layer.cornerRadius = self.instructionsButton.frame.width / 2
+        self.beginGameButton.layer.cornerRadius = self.beginGameButton.frame.width / 2
+        self.beginGameButton.setNeedsUpdateConstraints()
+        println("View Did Layout Subviews \(self.instructionsButton.frame.width) \(self.instructionsButton.layer.cornerRadius) ")
+        
+
     }
     
     override func viewWillAppear(animated: Bool)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0812431AA4B54200684930 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0812421AA4B54200684930 /* iAd.framework */; };
 		8D2A625A1A8821020031FD2F /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A62591A8821020031FD2F /* GameLogic.swift */; };
 		8D3DA4F71A9F0627003C4163 /* redPoint.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D3DA4F61A9F0627003C4163 /* redPoint.wav */; };
 		8D634DBA1A9F023B007969B3 /* introSong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D634DB91A9F023B007969B3 /* introSong.wav */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D0812421AA4B54200684930 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		8D2A62591A8821020031FD2F /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		8D3DA4F61A9F0627003C4163 /* redPoint.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redPoint.wav; sourceTree = "<group>"; };
 		8D634DB91A9F023B007969B3 /* introSong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = introSong.wav; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0812431AA4B54200684930 /* iAd.framework in Frameworks */,
 				8DA2EA571A906EA700EE6E80 /* AVFoundation.framework in Frameworks */,
 				8DA2EA551A906C3000EE6E80 /* AudioToolbox.framework in Frameworks */,
 			);
@@ -107,6 +110,7 @@
 		8DF883551A8415B40070D993 = {
 			isa = PBXGroup;
 			children = (
+				8D0812421AA4B54200684930 /* iAd.framework */,
 				8DF8836B1A8415B40070D993 /* Main.storyboard */,
 				8DBACCBD1A8874E8005AC970 /* Scene */,
 				8DBACCBE1A8874F4005AC970 /* Model */,
