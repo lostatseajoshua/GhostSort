@@ -23,8 +23,6 @@ class MainMenuViewController: UIViewController {
 
         self.canDisplayBannerAds = true
         //println("awake Form Nib \(self.instructionsButton.frame)")
-        println("awake From nib \(self.instructionsButton.frame.width) \(self.instructionsButton.layer.cornerRadius) ")
-
 
     }
     
@@ -49,7 +47,6 @@ class MainMenuViewController: UIViewController {
         } else {
             soundPrefenceButton.setTitle("Sound On", forState: .Normal)
         }
-        println("View Did Layout Subviews \(self.instructionsButton.frame.width) \(self.instructionsButton.layer.cornerRadius) ")
 
     }
     

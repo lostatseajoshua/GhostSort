@@ -10,6 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var viewController: UIViewController!
     let gameLogic = GameLogic()
     let score = SKLabelNode()
     var selectedNode: SKNode?
@@ -101,6 +102,13 @@ class GameScene: SKScene {
         {
             self.runAction(gameOverSound())
         }
+        let crossFadeTransition = SKTransition.crossFadeWithDuration(1.0) as SKTransition
+
+        let gameOverScene = GameOverScene.unarchiveFromFile("GameOverScene") as GameOverScene?
+        gameOverScene?.scaleMode = SKSceneScaleMode.AspectFill
+        gameOverScene?.viewController = viewController
+        self.scene!.view?.presentScene(gameOverScene, transition: crossFadeTransition)
+        self.removeFromParent()
     }
     //MARK: CREATE NODES
     //MARK: GHOST NODES
