@@ -118,6 +118,7 @@
                             <constraint firstItem="iLa-0n-YfK" firstAttribute="top" secondItem="DYg-BJ-scx" secondAttribute="top" id="lDx-mj-Mx1"/>
                             <constraint firstAttribute="bottom" secondItem="DYg-BJ-scx" secondAttribute="bottom" constant="20" symbolic="YES" id="omG-4p-JDZ"/>
                         </constraints>
+                        <variation key="heightClass=compact-widthClass=compact"/>
                     </view>
                     <connections>
                         <outlet property="beginGameButton" destination="DYg-BJ-scx" id="pg6-DB-jrL"/>
@@ -159,25 +160,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Xd-mf-xrR">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Xd-mf-xrR">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="lSE-mP-RcR">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lSE-mP-RcR">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eT-ne-RJy">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eT-ne-RJy">
                                             <rect key="frame" x="8" y="44" width="584" height="151"/>
-                                            <string key="text">Swipe the blue ghost to blue grave.  Swipe the red ghost to the red grave. Game over if you swipe a ghost to the incorrect grave color or the ghost fades away.  Ghost fade after 10 seconds after appearing on screen.  The game speeds up the higher you score and the ghost will fade away quicker.  </string>
+                                            <mutableString key="text">Swipe the blue ghost to blue grave.  Swipe the red ghost to the red grave. Game over if you swipe a ghost to the incorrect grave color or the ghost fades away.  Ghost fade after 10 seconds after appearing on screen.  The game speeds up the higher you score and the ghost will fade away quicker.  </mutableString>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=compact-widthClass=compact">
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="RedGhost" translatesAutoresizingMaskIntoConstraints="NO" id="eha-FC-vmk">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedGhost" translatesAutoresizingMaskIntoConstraints="NO" id="eha-FC-vmk">
                                             <rect key="frame" x="365" y="532" width="45" height="49"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="BlueGhost" translatesAutoresizingMaskIntoConstraints="NO" id="axY-5C-Qto">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueGhost" translatesAutoresizingMaskIntoConstraints="NO" id="axY-5C-Qto">
                                             <rect key="frame" x="365" y="454" width="45" height="49"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="36" id="mke-U4-y5w"/>
@@ -193,7 +194,7 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="☜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-Ik-T2B">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-Ik-T2B">
                                             <rect key="frame" x="297" y="468" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="36" id="3vi-NF-Nre"/>
@@ -215,7 +216,7 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="☜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfS-Yz-gQV">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☜" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfS-Yz-gQV">
                                             <rect key="frame" x="297" y="546" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="h3N-2e-6cx"/>
@@ -234,10 +235,10 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="RedGrave" translatesAutoresizingMaskIntoConstraints="NO" id="FHh-KE-Llp">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedGrave" translatesAutoresizingMaskIntoConstraints="NO" id="FHh-KE-Llp">
                                             <rect key="frame" x="190" y="522" width="70" height="70"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="BlueGrave" translatesAutoresizingMaskIntoConstraints="NO" id="QxD-FD-DfO">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlueGrave" translatesAutoresizingMaskIntoConstraints="NO" id="QxD-FD-DfO">
                                             <rect key="frame" x="190" y="444" width="70" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="52" id="ikm-iA-oG3"/>
@@ -287,12 +288,12 @@
                                             <exclude reference="AzJ-xR-Gat"/>
                                             <exclude reference="OFC-jl-3NS"/>
                                             <exclude reference="hzo-id-z75"/>
-                                            <exclude reference="WA7-Z2-tTe"/>
-                                            <exclude reference="aUX-qR-CvX"/>
                                             <exclude reference="TuI-Zb-smN"/>
                                             <exclude reference="UWp-pt-QKY"/>
                                             <exclude reference="mJn-Ii-blw"/>
                                             <exclude reference="tKL-z6-L5C"/>
+                                            <exclude reference="WA7-Z2-tTe"/>
+                                            <exclude reference="aUX-qR-CvX"/>
                                             <exclude reference="dOm-1o-KvA"/>
                                             <exclude reference="mWX-ml-OoS"/>
                                             <exclude reference="vDK-2i-Icr"/>
@@ -314,12 +315,12 @@
                                             <include reference="AzJ-xR-Gat"/>
                                             <include reference="OFC-jl-3NS"/>
                                             <include reference="hzo-id-z75"/>
-                                            <include reference="WA7-Z2-tTe"/>
-                                            <include reference="aUX-qR-CvX"/>
                                             <include reference="TuI-Zb-smN"/>
                                             <include reference="UWp-pt-QKY"/>
                                             <include reference="mJn-Ii-blw"/>
                                             <include reference="tKL-z6-L5C"/>
+                                            <include reference="WA7-Z2-tTe"/>
+                                            <include reference="aUX-qR-CvX"/>
                                             <include reference="dOm-1o-KvA"/>
                                             <include reference="mWX-ml-OoS"/>
                                             <include reference="vDK-2i-Icr"/>
@@ -333,10 +334,11 @@
                                             <include reference="Znn-p0-lOt"/>
                                         </mask>
                                     </variation>
+                                    <variation key="heightClass=compact-widthClass=compact"/>
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9R7-x6-CMq">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9R7-x6-CMq">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="How To Play" id="MNY-OB-bu0">
@@ -381,6 +383,7 @@
                                 <include reference="Rd9-Wo-a7P"/>
                             </mask>
                         </variation>
+                        <variation key="heightClass=compact-widthClass=compact"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="953-wa-zNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
