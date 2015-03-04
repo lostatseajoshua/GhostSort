@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 class GameLogic
 {
     var score: Int {
@@ -15,11 +15,11 @@ class GameLogic
             updateGameSpeed()
         }
     }
-    var speed: Double
+    var speed: CGFloat
     var speedRange: Double
     init(){
         score = 0
-        speed = DEFAULT_GAMESPEED
+        speed = 1.0
         speedRange = DEFAULT_GAMESPEED + GAME_SPEED_BUFFERRANGE
     }
     
@@ -35,18 +35,10 @@ class GameLogic
     
     private func updateGameSpeed()
     {
-        switch score
+        if score % 15 == 0
         {
-        case 10: increaseGameSpeed()
-        case 15: increaseGameSpeed()
-        case 25: increaseGameSpeed()
-        case 35: increaseGameSpeed()
-        default: speed = DEFAULT_GAMESPEED; speedRange = speed + GAME_SPEED_BUFFERRANGE
+            speed = speed + 0.2
         }
-    }
-    private func increaseGameSpeed()
-    {
-        speed = speed - SPEED_DECREASE_AMOUNT; speedRange = speed - GAME_SPEED_BUFFERRANGE
     }
     
 }

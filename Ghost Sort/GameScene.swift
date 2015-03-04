@@ -54,7 +54,9 @@ class GameScene: SKScene {
     {
         /* Called before each frame is rendered */
         score.text = "\(gameLogic.score)"
+        gameSpeed(gameLogic.speed)
     }
+    
     //MARK: CREATE GAME SCENE
     func createInitalScene()
     {
@@ -66,9 +68,9 @@ class GameScene: SKScene {
     
     func createScoreLabel()
     {
-        score.position = CGPoint(x: CGRectGetMidX(self.view!.frame), y: CGRectGetMaxY(self.view!.frame) - 28)
+        score.position = CGPoint(x: CGRectGetMidX(self.view!.frame), y: CGRectGetMaxY(self.view!.frame) - 35)
         score.fontColor = SKColor.whiteColor()
-        score.fontName = "AvenirNext-UltraLight"
+        score.fontName = "AvenirNext-Regular"
         score.text = "0"
         self.addChild(score)
     }
@@ -107,6 +109,7 @@ class GameScene: SKScene {
         let gameOverScene = GameOverScene.unarchiveFromFile("GameOverScene") as GameOverScene?
         gameOverScene?.scaleMode = SKSceneScaleMode.AspectFill
         gameOverScene?.viewController = viewController
+        gameOverScene?.gameScore = gameLogic.score
         self.scene!.view?.presentScene(gameOverScene, transition: crossFadeTransition)
         self.removeFromParent()
     }
@@ -184,7 +187,7 @@ class GameScene: SKScene {
     }
     func delayActionByGameSpeed() -> SKAction
     {
-        return SKAction.waitForDuration(gameLogic.speed, withRange: gameLogic.speedRange)
+        return SKAction.waitForDuration(2.0, withRange: 3)
 
     }
     func waitForDuration(delayTime: NSTimeInterval) -> SKAction
@@ -349,5 +352,9 @@ class GameScene: SKScene {
             userDefaults.synchronize()
             return true
         }
+    }
+    func gameSpeed(speedMultipler: CGFloat)
+    {
+        self.speed = speedMultipler
     }
 }

@@ -13,9 +13,17 @@ import SpriteKit
 class GameOverScene: SKScene {
     
     var viewController: UIViewController!
+    var gameScore: Int!
     
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor().hexStringToUIColor("B95BFE")
+        let scoreNode = self.childNodeWithName(SCORE_LABEL_NODE_NAME) as SKLabelNode
+        if gameScore <= 0
+        {
+            scoreNode.text = "Score: \(gameScore)😰"
+        } else {
+            scoreNode.text = "Score: \(gameScore)😄"
+        }
     }
     override func update(currentTime: NSTimeInterval) {
         
@@ -43,7 +51,6 @@ class GameOverScene: SKScene {
         self.removeFromParent()
         self.view?.presentScene(nil)
         viewController.dismissViewControllerAnimated(true, completion: nil)
-    
     }
     
     
